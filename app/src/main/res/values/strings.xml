@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">LoveWallpaper</string>
+    <string name="title">Title</string>
+    <string name="welcome_use_love_wallpaper">Welcome to love wallpaper！</string>
+    <string name="agree">Agree</string>
+    <string name="disagree">Disagree and exit APP</string>
+    <string name="privacy_policy">《Privacy Policy》</string>
+    <string name="disclaimer">《Disclaimer》</string>
+    <string name="agreement_dialog_title">Disclaimer and privacy policy</string>
+    <string name="agreement_dialog_message">\t\tBefore using this application, please read and understand the《Disclaimer》and《Privacy Policy》.We will provide services to you in strict accordance with the above agreement to protect the security of your information.
+        Clicking \"Agree\" means that you have read and agreed to all the terms and conditions and can continue to use this application.</string>
+    <string name="permission_message">Need to get your permission</string>
+</resources>

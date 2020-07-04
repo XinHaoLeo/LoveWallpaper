@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2020 Leo
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~       http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <string name="app_name">爱壁纸</string>
+    <string name="title">标题</string>
+    <string name="welcome_use_love_wallpaper">欢迎使用爱壁纸！</string>
+    <string name="agree">同意</string>
+    <string name="disagree">不同意并退出APP</string>
+    <string name="privacy_policy">《隐私政策》</string>
+    <string name="disclaimer">《免责声明》</string>
+    <string name="agreement_dialog_title">免责声明和隐私政策</string>
+    <string name="agreement_dialog_message">\t\t在使用本应用之前，请您先阅读并了解《免责声明》和《隐私政策》。我们将严格按照上述协议为您提供服务，
+        保护您的信息安全，点击“同意”即表示您已阅读并同意全部条款，可以继续使用本应用。</string>
+    <string name="permission_message">需要获取您的相关权限</string>
+</resources>
