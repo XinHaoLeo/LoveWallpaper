@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 
-package com.xin.lovewallpaper.http
+package com.xin.lovewallpaper.ui.fragment
 
-import org.jsoup.nodes.Document
+import com.xin.lovewallpaper.R
+import com.xin.lovewallpaper.base.BaseFragment
 
 /**
- *
  *   █████▒█    ██  ▄████▄   ██ ▄█▀       ██████╗ ██╗   ██╗ ██████╗
  * ▓██   ▒ ██  ▓██▒▒██▀ ▀█   ██▄█▒        ██╔══██╗██║   ██║██╔════╝
  * ▒████ ░▓██  ▒██░▒▓█    ▄ ▓███▄░        ██████╔╝██║   ██║██║  ███╗
@@ -28,13 +28,17 @@ import org.jsoup.nodes.Document
  *  ░     ░░▒░ ░ ░   ░  ▒   ░ ░▒ ▒░
  *  ░ ░    ░░░ ░ ░ ░        ░ ░░ ░
  *           ░     ░ ░      ░  ░
- *@author : Leo
- *@date : 2020/7/4 10:54
- *@since : lightingxin@qq.com
- *@desc :
+ * @author : Leo
+ * @date : 2020/7/5 0:00
+ * @desc :
+ * @since : xinxiniscool@gmail.com
  */
-interface OnHttpListener {
-    fun onSuccess(document: Document)
+class SettingFragment :BaseFragment(){
+    override fun initLayoutView(): Int  = R.layout.fragment_setting
 
-    fun onError(errorMsg: String)
+    override fun initEvent() {
+    }
+
+    override fun initData() {
+    }
 }

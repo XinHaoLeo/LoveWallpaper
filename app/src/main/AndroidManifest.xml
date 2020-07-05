@@ -26,6 +26,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
+        android:requestLegacyExternalStorage="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute">
         <activity android:name=".ui.activity.WelcomeActivity" >
             <intent-filter>
@@ -38,6 +39,16 @@
         <activity android:name=".ui.activity.DisclaimerActivity" />
         <activity android:name=".ui.activity.PrivacyActivity" />
         <activity android:name=".ui.activity.SplashActivity" />
+        <activity android:name=".ui.activity.BigImageActivity" />
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

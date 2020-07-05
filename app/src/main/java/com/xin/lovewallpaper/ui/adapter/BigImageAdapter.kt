@@ -13,12 +13,14 @@
  * limitations under the License.
  */
 
-package com.xin.lovewallpaper.http
+package com.xin.lovewallpaper.ui.adapter
 
-import org.jsoup.nodes.Document
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager.widget.PagerAdapter
+import com.xin.lovewallpaper.base.BaseFragment
 
 /**
- *
  *   █████▒█    ██  ▄████▄   ██ ▄█▀       ██████╗ ██╗   ██╗ ██████╗
  * ▓██   ▒ ██  ▓██▒▒██▀ ▀█   ██▄█▒        ██╔══██╗██║   ██║██╔════╝
  * ▒████ ░▓██  ▒██░▒▓█    ▄ ▓███▄░        ██████╔╝██║   ██║██║  ███╗
@@ -28,13 +30,47 @@ import org.jsoup.nodes.Document
  *  ░     ░░▒░ ░ ░   ░  ▒   ░ ░▒ ▒░
  *  ░ ░    ░░░ ░ ░ ░        ░ ░░ ░
  *           ░     ░ ░      ░  ░
- *@author : Leo
- *@date : 2020/7/4 10:54
- *@since : lightingxin@qq.com
- *@desc :
+ * @author : Leo
+ * @date : 2020/7/5 13:39
+ * @desc :
+ * @since : xinxiniscool@gmail.com
  */
-interface OnHttpListener {
-    fun onSuccess(document: Document)
+class BigImageAdapter(fm: FragmentManager, behavior: Int) : FragmentPagerAdapter(fm, behavior) {
+    private val mFragmentList: ArrayList<BaseFragment> = ArrayList()
 
-    fun onError(errorMsg: String)
+    fun addFragment(fragment: BaseFragment) {
+        mFragmentList.add(fragment)
+        notifyDataSetChanged()
+    }
+
+    override fun getItem(position: Int): BaseFragment {
+        return mFragmentList[position]
+    }
+
+    override fun getCount(): Int {
+        return mFragmentList.size
+    }
+
+    /**
+     * 返回值有三种，
+     * POSITION_UNCHANGED  默认值，位置没有改变
+     * POSITION_NONE       item已经不存在
+     * position            item新的位置
+     * 当position发生改变时这个方法应该返回改变后的位置，以便页面刷新。
+     */
+    override fun getItemPosition(`object`: Any): Int {
+        if (`object` is BaseFragment) {
+            val index = mFragmentList.indexOf(`object`)
+            return if (index != -1) {
+                index
+            } else {
+                PagerAdapter.POSITION_NONE
+            }
+        }
+        return super.getItemPosition(`object`)
+    }
+
+    override fun getItemId(position: Int): Long {
+        return mFragmentList[position].hashCode().toLong()
+    }
 }

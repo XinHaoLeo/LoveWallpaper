@@ -58,7 +58,22 @@ fun getContentData(page: Int, listener: OnHttpListener) {
         }
         Log.d(TAG, "getContentData: statusCode=$statusCode")
         if (statusCode == 200) {
-            listener.onSucess(withContext(Dispatchers.IO) {
+            listener.onSuccess(withContext(Dispatchers.IO) {
+                createConnection(url).get()
+            })
+        } else{
+            listener.onError("获取失败")
+        }
+    }
+}
+fun getBigImageData(url: String, listener: OnHttpListener) {
+    GlobalScope.launch(Dispatchers.Main) {
+        val statusCode = withContext(Dispatchers.IO) {
+            createConnection(url).execute().statusCode()
+        }
+        Log.d(TAG, "getBigImageData: statusCode=$statusCode")
+        if (statusCode == 200) {
+            listener.onSuccess(withContext(Dispatchers.IO) {
                 createConnection(url).get()
             })
         } else{

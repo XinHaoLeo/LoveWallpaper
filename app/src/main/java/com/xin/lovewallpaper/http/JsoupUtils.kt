@@ -52,12 +52,12 @@ fun paresContentData(document: Document): ArrayList<ContentData> {
 //            Log.v(TAG, "paresContentData: contentImg=$contentImg")
 //            Log.d(TAG, "paresContentData: contentTitle=$contentTitle")
         }
-        for(urlData in data.select("a[class]")){
+        for (urlData in data.select("a[class]")) {
             val contentUrl = urlData.select("a[href]").attr("href")
             contentData.contentUrl = contentUrl
 //            Log.i(TAG, "paresContentData: contentUrl=$contentUrl")
         }
-        for (imgNumData in data.getElementsByClass("item-num")){
+        for (imgNumData in data.getElementsByClass("item-num")) {
             val html = imgNumData.select("span[class]").html()
             val indexOf = html.indexOf(" ")
             val contentImgNum = html.substring(0, indexOf)
@@ -65,6 +65,17 @@ fun paresContentData(document: Document): ArrayList<ContentData> {
 //            Log.w(TAG, "paresContentData: imgNumData=$contentImgNum")
         }
         list.add(contentData)
+    }
+    return list
+}
+
+fun parseBigImageData(document: Document): ArrayList<String> {
+    val list = ArrayList<String>()
+    val elements =
+        document.getElementsByClass("post-item col-xs-6 col-sm-4 col-md-3 col-lg-3")
+    for (data in elements) {
+        list.add(data.select("div[data-src]").attr("data-src"))
+//        Log.w(TAG, "parseBigImageData: data="+data.select("div[data-src]").attr("data-src"))
     }
     return list
 }

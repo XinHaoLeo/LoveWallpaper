@@ -13,12 +13,16 @@
  * limitations under the License.
  */
 
-package com.xin.lovewallpaper.http
+package com.xin.lovewallpaper.presenter
 
+import com.xin.lovewallpaper.base.BasePresenter
+import com.xin.lovewallpaper.contract.MagazineTaoTuContract
+import com.xin.lovewallpaper.http.OnHttpListener
+import com.xin.lovewallpaper.http.getContentData
+import com.xin.lovewallpaper.http.paresContentData
 import org.jsoup.nodes.Document
 
 /**
- *
  *   █████▒█    ██  ▄████▄   ██ ▄█▀       ██████╗ ██╗   ██╗ ██████╗
  * ▓██   ▒ ██  ▓██▒▒██▀ ▀█   ██▄█▒        ██╔══██╗██║   ██║██╔════╝
  * ▒████ ░▓██  ▒██░▒▓█    ▄ ▓███▄░        ██████╔╝██║   ██║██║  ███╗
@@ -28,13 +32,23 @@ import org.jsoup.nodes.Document
  *  ░     ░░▒░ ░ ░   ░  ▒   ░ ░▒ ▒░
  *  ░ ░    ░░░ ░ ░ ░        ░ ░░ ░
  *           ░     ░ ░      ░  ░
- *@author : Leo
- *@date : 2020/7/4 10:54
- *@since : lightingxin@qq.com
- *@desc :
+ * @author : Leo
+ * @date : 2020/7/4 23:08
+ * @desc :
+ * @since : xinxiniscool@gmail.com
  */
-interface OnHttpListener {
-    fun onSuccess(document: Document)
+class MagazineTaoTuPresenter : BasePresenter<MagazineTaoTuContract.View>(),
+    MagazineTaoTuContract.Presenter {
+    override fun getListContentData(page: Int) {
+        getContentData(page, object : OnHttpListener {
+            override fun onSuccess(document: Document) {
+                getView()?.showListContentData(paresContentData(document))
+            }
 
-    fun onError(errorMsg: String)
+            override fun onError(errorMsg: String) {
+                getView()?.showShortToast(errorMsg)
+            }
+
+        })
+    }
 }

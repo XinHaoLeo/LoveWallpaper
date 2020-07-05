@@ -42,12 +42,12 @@ class MainPresenter : BasePresenter<MainContract.View>(), MainContract.Presenter
 
     override fun getContent(page: Int) {
         getContentData(page, object : OnHttpListener {
-            override fun onSucess(document: Document) {
+            override fun onSuccess(document: Document) {
                 paresContentData(document)
             }
 
             override fun onError(errorMsg: String) {
-
+                getView()?.showShortToast(errorMsg)
             }
         })
     }

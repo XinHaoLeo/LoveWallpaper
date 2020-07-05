@@ -13,12 +13,13 @@
  * limitations under the License.
  */
 
-package com.xin.lovewallpaper.http
+package com.xin.lovewallpaper.base
 
-import org.jsoup.nodes.Document
+import android.view.View
+import androidx.annotation.StringRes
+import com.blankj.utilcode.util.ToastUtils
 
 /**
- *
  *   █████▒█    ██  ▄████▄   ██ ▄█▀       ██████╗ ██╗   ██╗ ██████╗
  * ▓██   ▒ ██  ▓██▒▒██▀ ▀█   ██▄█▒        ██╔══██╗██║   ██║██╔════╝
  * ▒████ ░▓██  ▒██░▒▓█    ▄ ▓███▄░        ██████╔╝██║   ██║██║  ███╗
@@ -28,13 +29,56 @@ import org.jsoup.nodes.Document
  *  ░     ░░▒░ ░ ░   ░  ▒   ░ ░▒ ▒░
  *  ░ ░    ░░░ ░ ░ ░        ░ ░░ ░
  *           ░     ░ ░      ░  ░
- *@author : Leo
- *@date : 2020/7/4 10:54
- *@since : lightingxin@qq.com
- *@desc :
+ * @author : Leo
+ * @date : 2020/7/4 23:02
+ * @desc :
+ * @since : xinxiniscool@gmail.com
  */
-interface OnHttpListener {
-    fun onSuccess(document: Document)
+abstract class BaseMvpFragment<in V : IView, P : IPresenter<in V>> : BaseFragment(), IView {
 
-    fun onError(errorMsg: String)
+    protected lateinit var mPresenter: P
+
+    protected abstract fun initPresenter():P
+
+    override fun initEvent() {
+        mPresenter = initPresenter()
+        mPresenter.attachView(this as V)
+    }
+
+    override fun showLoading() {
+
+    }
+
+    override fun dismissLoading() {
+
+    }
+
+    override fun showShortToast(msg: String) {
+        ToastUtils.showShort(msg)
+    }
+
+    override fun showShortToast(@StringRes msg: Int) {
+        ToastUtils.showShort(msg)
+    }
+
+    override fun showLongToast(msg: String) {
+        ToastUtils.showLong(msg)
+    }
+
+    override fun showLongToast(@StringRes msg: Int) {
+        ToastUtils.showLong(msg)
+    }
+
+    override fun showSnackBar(view: View, msg: String) {
+        super.showSnackBar(view, msg)
+    }
+
+    override fun showSnackBar(view: View, msg: String, actionText: String) {
+        super.showSnackBar(view, msg, actionText)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mPresenter.detachView(this as V)
+    }
 }

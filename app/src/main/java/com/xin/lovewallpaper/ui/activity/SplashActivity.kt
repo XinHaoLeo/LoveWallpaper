@@ -28,6 +28,7 @@ import com.xin.lovewallpaper.contract.SplashContract
 import com.xin.lovewallpaper.http.bean.ContentData
 import com.xin.lovewallpaper.presenter.SplashPresenter
 import kotlinx.android.synthetic.main.activity_splash.*
+import java.lang.Exception
 
 /**
  *
@@ -87,18 +88,20 @@ class SplashActivity : BaseMvpActivity<SplashContract.View, SplashPresenter>(),
     override fun showFirstWallpaper(list: ArrayList<ContentData>) {
         if (list.size > 1) {
             val contentImg = list[0].contentImg
-//            mSPUtils.put(SPKey.FIRST_WALLPAPER_URL,contentImg)
-
-            //加载大图
-            Glide.with(this@SplashActivity).asBitmap().load(contentImg)
-                .into(object : BitmapImageViewTarget(ivSplash) {
-                    override fun onResourceReady(
-                        resource: Bitmap,
-                        transition: Transition<in Bitmap>?
-                    ) {
-                        ivSplash.setImageBitmap(resource)
-                    }
-                })
+            //加载大图 try catch防止挂了
+            try {
+                Glide.with(this@SplashActivity).asBitmap().load(contentImg)
+                    .into(object : BitmapImageViewTarget(ivSplash) {
+                        override fun onResourceReady(
+                            resource: Bitmap,
+                            transition: Transition<in Bitmap>?
+                        ) {
+                            ivSplash.setImageBitmap(resource)
+                        }
+                    })
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
         }
     }
 

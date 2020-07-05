@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 
-package com.xin.lovewallpaper.http
+package com.xin.lovewallpaper.contract
 
-import org.jsoup.nodes.Document
+import com.xin.lovewallpaper.base.IPresenter
+import com.xin.lovewallpaper.base.IView
 
 /**
- *
  *   █████▒█    ██  ▄████▄   ██ ▄█▀       ██████╗ ██╗   ██╗ ██████╗
  * ▓██   ▒ ██  ▓██▒▒██▀ ▀█   ██▄█▒        ██╔══██╗██║   ██║██╔════╝
  * ▒████ ░▓██  ▒██░▒▓█    ▄ ▓███▄░        ██████╔╝██║   ██║██║  ███╗
@@ -28,13 +28,17 @@ import org.jsoup.nodes.Document
  *  ░     ░░▒░ ░ ░   ░  ▒   ░ ░▒ ▒░
  *  ░ ░    ░░░ ░ ░ ░        ░ ░░ ░
  *           ░     ░ ░      ░  ░
- *@author : Leo
- *@date : 2020/7/4 10:54
- *@since : lightingxin@qq.com
- *@desc :
+ * @author : Leo
+ * @date : 2020/7/5 13:14
+ * @desc :
+ * @since : xinxiniscool@gmail.com
  */
-interface OnHttpListener {
-    fun onSuccess(document: Document)
+interface BigImageContract {
+    interface View : IView {
+        fun showListImageUrl(list: ArrayList<String>)
+    }
 
-    fun onError(errorMsg: String)
+    interface Presenter : IPresenter<View> {
+        fun getListImageUrl(url: String)
+    }
 }

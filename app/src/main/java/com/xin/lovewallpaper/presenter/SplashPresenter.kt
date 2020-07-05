@@ -41,13 +41,13 @@ import org.jsoup.nodes.Document
 class SplashPresenter : BasePresenter<SplashContract.View>(), SplashContract.Presenter {
     override fun getFirstWallpaper(page: Int) {
         getContentData(page,object :OnHttpListener{
-            override fun onSucess(document: Document) {
+            override fun onSuccess(document: Document) {
                 val contentData = paresContentData(document)
                 getView()?.showFirstWallpaper(contentData)
             }
 
             override fun onError(errorMsg: String) {
-
+                getView()?.showShortToast(errorMsg)
             }
 
         })

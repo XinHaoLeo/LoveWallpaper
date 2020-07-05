@@ -13,12 +13,16 @@
  * limitations under the License.
  */
 
-package com.xin.lovewallpaper.http
+package com.xin.lovewallpaper.presenter
 
+import com.xin.lovewallpaper.base.BasePresenter
+import com.xin.lovewallpaper.contract.BigImageContract
+import com.xin.lovewallpaper.http.OnHttpListener
+import com.xin.lovewallpaper.http.getBigImageData
+import com.xin.lovewallpaper.http.parseBigImageData
 import org.jsoup.nodes.Document
 
 /**
- *
  *   █████▒█    ██  ▄████▄   ██ ▄█▀       ██████╗ ██╗   ██╗ ██████╗
  * ▓██   ▒ ██  ▓██▒▒██▀ ▀█   ██▄█▒        ██╔══██╗██║   ██║██╔════╝
  * ▒████ ░▓██  ▒██░▒▓█    ▄ ▓███▄░        ██████╔╝██║   ██║██║  ███╗
@@ -28,13 +32,25 @@ import org.jsoup.nodes.Document
  *  ░     ░░▒░ ░ ░   ░  ▒   ░ ░▒ ▒░
  *  ░ ░    ░░░ ░ ░ ░        ░ ░░ ░
  *           ░     ░ ░      ░  ░
- *@author : Leo
- *@date : 2020/7/4 10:54
- *@since : lightingxin@qq.com
- *@desc :
+ * @author : Leo
+ * @date : 2020/7/5 13:17
+ * @desc :
+ * @since : xinxiniscool@gmail.com
  */
-interface OnHttpListener {
-    fun onSuccess(document: Document)
+class BigImagePresenter : BasePresenter<BigImageContract.View>(), BigImageContract.Presenter {
 
-    fun onError(errorMsg: String)
+    override fun getListImageUrl(url: String) {
+        getBigImageData(url, object : OnHttpListener {
+            override fun onSuccess(document: Document) {
+                getView()?.showListImageUrl(parseBigImageData(document))
+            }
+
+            override fun onError(errorMsg: String) {
+                getView()?.showShortToast(errorMsg)
+            }
+
+        })
+    }
+
+
 }
