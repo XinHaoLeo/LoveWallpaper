@@ -1,18 +1,3 @@
-/*
- * Copyright 2020 Leo
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.xin.lovewallpaper.util
 
 import android.content.ContentResolver
@@ -95,11 +80,13 @@ class FileUtils {
                 return size
             }
             val files = file.listFiles()
-            for (i in files.indices) {
-                size += if (files[i].isDirectory) {
-                    getFileSize(files[i])
-                } else {
-                    files[i].length()
+            if (files!=null){
+                for (i in files.indices) {
+                    size += if (files[i].isDirectory) {
+                        getFileSize(files[i])
+                    } else {
+                        files[i].length()
+                    }
                 }
             }
             return size
@@ -130,17 +117,46 @@ class FileUtils {
         }
 
         //file：要删除的文件夹的所在位置
-        fun deleteFile(file: File) {
+        fun delete(file: File): Boolean {
             if (file.isDirectory) {
-                val files = file.listFiles()
-                for (i in files.indices) {
-                    val f = files[i]
-                    deleteFile(f)
-                }
-//                file.delete() //如要保留文件夹，只删除文件，请注释这行
-            } else if (file.exists()) {
-                file.delete()
+                return deleteDir(file)
             }
+            return deleteFile(file)
+        }
+
+        /**
+         * Delete the directory.
+         *
+         * @param dir The directory.
+         * @return `true`: success<br></br>`false`: fail
+         */
+        private fun deleteDir(dir: File?): Boolean {
+            if (dir == null) return false
+            // dir doesn't exist then return true
+            if (!dir.exists()) return true
+            // dir isn't a directory then return false
+            if (!dir.isDirectory) return false
+            val files = dir.listFiles()
+            if (files != null && files.isNotEmpty()) {
+                for (file in files) {
+                    if (file.isFile) {
+                        if (!file.delete()) return false
+                    } else if (file.isDirectory) {
+                        if (!deleteDir(file)) return false
+                    }
+                }
+            }
+            return dir.delete()
+        }
+
+        /**
+         * Delete the file.
+         *
+         * @param file The file.
+         * @return `true`: success<br></br>`false`: fail
+         */
+        private fun deleteFile(file: File?): Boolean {
+            return file != null && (!file.exists() || file.isFile && file.delete())
         }
 
         fun getRealFilePath(context: Context, uri: Uri?): String? {

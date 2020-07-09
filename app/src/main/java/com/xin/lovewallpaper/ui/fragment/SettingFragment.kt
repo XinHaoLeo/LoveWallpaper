@@ -15,8 +15,19 @@
 
 package com.xin.lovewallpaper.ui.fragment
 
+import android.content.Intent
+import android.view.View
+import com.kongzue.dialog.util.BaseDialog
+import com.kongzue.dialog.util.DialogSettings
+import com.kongzue.dialog.v3.MessageDialog
+import com.kongzue.dialog.v3.TipDialog
 import com.xin.lovewallpaper.R
 import com.xin.lovewallpaper.base.BaseFragment
+import com.xin.lovewallpaper.ui.activity.AboutUsActivity
+import com.xin.lovewallpaper.ui.activity.IssueActivity
+import com.xin.lovewallpaper.util.FileUtils
+import kotlinx.android.synthetic.main.fragment_setting.*
+import java.io.File
 
 /**
  *   █████▒█    ██  ▄████▄   ██ ▄█▀       ██████╗ ██╗   ██╗ ██████╗
@@ -33,12 +44,52 @@ import com.xin.lovewallpaper.base.BaseFragment
  * @desc :
  * @since : xinxiniscool@gmail.com
  */
-class SettingFragment :BaseFragment(){
-    override fun initLayoutView(): Int  = R.layout.fragment_setting
+class SettingFragment : BaseFragment() {
+
+    private lateinit var mFile: File
+
+    override fun initLayoutView(): Int = R.layout.fragment_setting
 
     override fun initEvent() {
+        rlCleanCache.setOnClickListener {
+            MessageDialog.build(mActivity)
+                .setStyle(DialogSettings.STYLE.STYLE_IOS)
+                .setTitle("提示")
+                .setMessage("图片缓存可以有效节省流量,确定清空缓存吗")
+                .setOkButton("确定") { baseDialog: BaseDialog, _: View? ->
+                    val isDelete = FileUtils.delete(mFile)
+                    if (isDelete) {
+                        TipDialog.show(mActivity, "清除成功", TipDialog.TYPE.SUCCESS)
+                    } else {
+                        TipDialog.show(mActivity, "清除失败", TipDialog.TYPE.SUCCESS)
+                    }
+                    tvCacheSize.text = FileUtils.formatFileSize(FileUtils.getFileSize(mFile))
+                    baseDialog.doDismiss()
+                    false
+                }
+                .setCancelButton("取消") { baseDialog: BaseDialog, _: View? ->
+                    baseDialog.doDismiss()
+                    false
+                }.show()
+        }
+        rlIssue.setOnClickListener {
+            startActivity(Intent(mActivity,IssueActivity::class.java))
+        }
+        rlAboutUs.setOnClickListener {
+            startActivity(Intent(mActivity, AboutUsActivity::class.java))
+        }
     }
 
     override fun initData() {
+        mFile = File(mActivity.cacheDir.absolutePath)
+        val fileSize = FileUtils.getFileSize(mFile)
+        tvCacheSize.text = FileUtils.formatFileSize(fileSize)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        //保证每次看完图片再次来到这个fragment能够重新获取缓存数据大小
+        val fileSize = FileUtils.getFileSize(mFile)
+        tvCacheSize.text = FileUtils.formatFileSize(fileSize)
     }
 }

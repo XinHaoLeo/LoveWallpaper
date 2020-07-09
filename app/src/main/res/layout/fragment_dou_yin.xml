@@ -13,18 +13,15 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/yellow"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <TextView
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDouYin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="我是抖音"
-        android:gravity="center"
-        android:textColor="@color/red"
-        android:textSize="28sp" />
+        android:overScrollMode="never" />
 
-</LinearLayout>
+</FrameLayout>

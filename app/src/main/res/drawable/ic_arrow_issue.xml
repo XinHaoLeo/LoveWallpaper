@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright 2020 Leo
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~       http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="1024.0"
+    android:viewportHeight="1024.0">
+
+    <path
+        android:fillColor="#F86B6B"
+        android:pathData="M487.60832 508.905472m-463.849472 0a463.849472 463.849472 0 1 0 927.698944 0 463.849472 463.849472 0 1 0-927.698944 0Z"
+        tools:ignore="VectorPath" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M228.009984 348.16h512v43.689984h-512zM227.670016 505.856h512v43.692032h-512zM228.009984 649.216h512v43.692032h-512z"
+        tools:ignore="VectorPath" />
+    <path
+        android:fillColor="#F86B6B"
+        android:pathData="M851.456 902.656S858.112 956.416 790.016 966.656H390.144s-147.456-20.48-215.04-125.952c145.408-73.728 344.064-102.4 344.064-102.4l332.466176 37.378048-0.178176 126.973952z"
+        tools:ignore="VectorPath" />
+
+</vector>

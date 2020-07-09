@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright 2020 Leo
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~       http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="1024.0"
+    android:viewportHeight="1024.0">
+
+    <path
+        android:fillColor="#148AC1"
+        android:pathData="M794.746269 1024h-565.492538c-125.325373 0-229.253731-103.928358-229.253731-229.253731V229.253731c0-125.325373 103.928358-229.253731 229.253731-229.253731h565.492538c125.325373 0 229.253731 103.928358 229.253731 229.253731v565.492538c0 126.853731-102.4 229.253731-229.253731 229.253731z" />
+    <path
+        android:fillColor="@color/white"
+        android:pathData="M512 382.089552m-30.567164 0a30.567164 30.567164 0 1 0 61.134328 0 30.567164 30.567164 0 1 0-61.134328 0Z" />
+    <path
+        android:fillColor="@color/white"
+        android:pathData="M512 458.507463c-16.81194 0-30.567164 13.755224-30.567164 30.567164v183.402985c0 16.81194 13.755224 30.567164 30.567164 30.567164s30.567164-13.755224 30.567164-30.567164V489.074627c0-16.81194-13.755224-30.567164-30.567164-30.567164z" />
+    <path
+        android:fillColor="@color/white"
+        android:pathData="M849.767164 287.331343c-6.113433-15.283582-16.81194-19.868657-33.62388-19.868656-160.477612 9.170149-238.423881-73.361194-276.632836-113.098508-10.698507-9.170149-16.81194-9.170149-27.510448-9.170149s-22.925373 4.585075-27.510448 9.170149c-38.208955 39.737313-111.570149 122.268657-276.632836 113.098508-16.81194 0-27.510448 4.585075-33.62388 19.868656 0 4.585075-169.647761 405.014925 316.370149 588.417911 6.113433 3.056716 13.755224 4.585075 21.397015 4.585074 7.641791 0 15.283582-1.528358 21.397015-4.585074 486.01791-183.402985 316.370149-583.832836 316.370149-588.417911zM512 848.238806C100.871642 692.346269 168.119403 383.61791 197.158209 304.143284c163.534328 0 259.820896-68.776119 314.841791-117.683583 55.020896 47.379104 145.19403 117.683582 308.728358 117.683583h6.113433c24.453731 79.474627 96.286567 383.61791-314.841791 544.095522z"
+        tools:ignore="VectorPath" />
+
+</vector>

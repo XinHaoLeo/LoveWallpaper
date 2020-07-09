@@ -36,7 +36,7 @@ import org.jsoup.nodes.Document
  *@desc :
  */
 
-fun paresContentData(document: Document): ArrayList<ContentData> {
+fun parseContentData(document: Document): ArrayList<ContentData> {
     val list = ArrayList<ContentData>()
     //获取第6个div为class的内容
     val element = document.select("div[class]")[5]

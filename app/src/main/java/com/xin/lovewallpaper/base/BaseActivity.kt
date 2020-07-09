@@ -42,7 +42,7 @@ import com.google.android.material.snackbar.Snackbar
  */
 abstract class BaseActivity : AppCompatActivity() {
 
-    protected lateinit var mSPUtils:SPUtils
+    protected lateinit var mSPUtils: SPUtils
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -15,8 +15,19 @@
 
 package com.xin.lovewallpaper.ui.fragment
 
+import android.content.Intent
+import android.text.TextUtils
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.kongzue.dialog.v3.TipDialog
 import com.xin.lovewallpaper.R
-import com.xin.lovewallpaper.base.BaseFragment
+import com.xin.lovewallpaper.app.Constant
+import com.xin.lovewallpaper.base.BaseMvpFragment
+import com.xin.lovewallpaper.contract.TwitterContract
+import com.xin.lovewallpaper.http.bean.ContentData
+import com.xin.lovewallpaper.presenter.TwitterPresenter
+import com.xin.lovewallpaper.ui.activity.BigImageActivity
+import com.xin.lovewallpaper.ui.adapter.MagazineTaoTuAdapter
+import kotlinx.android.synthetic.main.fragment_magazine_taotu.*
 
 /**
  *   █████▒█    ██  ▄████▄   ██ ▄█▀       ██████╗ ██╗   ██╗ ██████╗
@@ -30,15 +41,55 @@ import com.xin.lovewallpaper.base.BaseFragment
  *           ░     ░ ░      ░  ░
  * @author : Leo
  * @date : 2020/7/4 23:58
- * @desc :
+ * @desc : 和杂志套图页一样,请求URL不同
  * @since : xinxiniscool@gmail.com
  */
-class TwitterFragment :BaseFragment() {
-    override fun initLayoutView(): Int  = R.layout.fragment_twitter
+class TwitterFragment : BaseMvpFragment<TwitterContract.View, TwitterPresenter>(),
+    TwitterContract.View {
 
-    override fun initEvent() {
-    }
+    private lateinit var mContentDataList: ArrayList<ContentData>
+    private lateinit var mAdapter: MagazineTaoTuAdapter
+    private var page = 1
+
+    override fun initPresenter(): TwitterPresenter = TwitterPresenter()
+
+    override fun initLayoutView(): Int = R.layout.fragment_magazine_taotu
 
     override fun initData() {
+        //默认设置五秒钟,等解析完成立马取消
+        TipDialog.showWait(mActivity, "小鑫正在为您努力加载中...").setTipTime(5000)
+        mPresenter.getListTwitterData(page)
+        mContentDataList = ArrayList()
+        mAdapter = MagazineTaoTuAdapter(mActivity, mContentDataList)
+        rvContent.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        rvContent.adapter = mAdapter
+        //不做下拉刷新操作,下拉刷新请求过于频繁
+        srfPeach.setEnableRefresh(false)
+        srfPeach.setOnLoadMoreListener {
+            page++
+            mPresenter.getListTwitterData(page)
+            it.finishLoadMore()
+        }
+        mAdapter.setOnItemClickListener(object : MagazineTaoTuAdapter.OnItemClickListener {
+            override fun onItemClick(position: Int) {
+                val contentData = mContentDataList[position]
+                if (TextUtils.isEmpty(contentData.contentUrl)) {
+                    TipDialog.show(mActivity, "资源未找到,访问失败", TipDialog.TYPE.ERROR)
+                } else {
+                    val intent = Intent(mActivity, BigImageActivity::class.java)
+                    intent.putExtra(Constant.IMAGE_URL, contentData.contentUrl)
+//                    intent.putExtra(Constant.IMAGE_NUM, filterNumber(contentData.contentImgNum))
+                    startActivity(intent)
+                }
+            }
+
+        })
+    }
+
+
+    override fun showListTwitterData(list: ArrayList<ContentData>) {
+        TipDialog.dismiss()
+        mContentDataList.addAll(list)
+        mAdapter.notifyDataSetChanged()
     }
 }

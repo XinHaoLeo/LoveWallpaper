@@ -48,7 +48,8 @@ class WelcomeActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
         const val REQUEST_CODE = 99
         val PERMISSIONS = arrayOf(
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_PHONE_STATE
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.CAMERA
         )
     }
 

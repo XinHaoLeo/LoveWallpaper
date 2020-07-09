@@ -61,7 +61,7 @@ fun getContentData(page: Int, listener: OnHttpListener) {
             listener.onSuccess(withContext(Dispatchers.IO) {
                 createConnection(url).get()
             })
-        } else{
+        } else {
             listener.onError("获取失败")
         }
     }
@@ -76,7 +76,58 @@ fun getBigImageData(url: String, listener: OnHttpListener) {
             listener.onSuccess(withContext(Dispatchers.IO) {
                 createConnection(url).get()
             })
-        } else{
+        } else {
+            listener.onError("获取失败")
+        }
+    }
+}
+
+fun getDouYinData(listener: OnHttpListener) {
+    val url = Constant.douYinUrl
+    GlobalScope.launch(Dispatchers.Main) {
+        val statusCode = withContext(Dispatchers.IO) {
+            createConnection(url).execute().statusCode()
+        }
+        Log.d(TAG, "getDouYinData: statusCode=$statusCode")
+        if (statusCode == 200) {
+            listener.onSuccess(withContext(Dispatchers.IO) {
+                createConnection(url).get()
+            })
+        } else {
+            listener.onError("获取失败")
+        }
+    }
+}
+
+fun getTwitterData(page: Int, listener: OnHttpListener) {
+    val url = Constant.twitterUrl.replace("indexPage", page.toString())
+    GlobalScope.launch(Dispatchers.Main) {
+        val statusCode = withContext(Dispatchers.IO) {
+            createConnection(url).execute().statusCode()
+        }
+        Log.d(TAG, "getTwitterData: statusCode=$statusCode")
+        if (statusCode == 200) {
+            listener.onSuccess(withContext(Dispatchers.IO) {
+                createConnection(url).get()
+            })
+        } else {
+            listener.onError("获取失败")
+        }
+    }
+}
+
+fun getSearchData(name:String,listener: OnHttpListener){
+    val url = Constant.searchUrl.replace("name", name)
+    GlobalScope.launch(Dispatchers.Main) {
+        val statusCode = withContext(Dispatchers.IO) {
+            createConnection(url).execute().statusCode()
+        }
+        Log.d(TAG, "getSearchData: statusCode=$statusCode")
+        if (statusCode == 200) {
+            listener.onSuccess(withContext(Dispatchers.IO) {
+                createConnection(url).get()
+            })
+        } else {
             listener.onError("获取失败")
         }
     }

@@ -15,10 +15,14 @@
 
 package com.xin.lovewallpaper.ui.activity
 
+import android.content.Intent
 import android.view.MenuItem
+import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.google.android.material.snackbar.BaseTransientBottomBar.BaseCallback
+import com.google.android.material.snackbar.Snackbar
 import com.xin.lovewallpaper.R
 import com.xin.lovewallpaper.base.BaseMvpActivity
 import com.xin.lovewallpaper.contract.MainContract
@@ -54,6 +58,9 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainPresenter>(), MainCo
         initFragment()
         showFragment("杂志桃图", 0)
         initBottomNavigationView()
+        fabSearch.setOnClickListener {
+            startActivity(Intent(this@MainActivity, SearchActivity::class.java))
+        }
     }
 
     private fun initFragment() {
@@ -89,6 +96,11 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainPresenter>(), MainCo
         if (position >= mFragments.size) {
             return
         }
+        if (position == 3) {
+            fabSearch.visibility = View.GONE
+        } else {
+            fabSearch.visibility = View.VISIBLE
+        }
         tvToolbarTitle.text = title
         val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
         val targetFg = mFragments[position]
@@ -105,12 +117,27 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainPresenter>(), MainCo
     }
 
     override fun onBackPressed() {
-        if (System.currentTimeMillis() - mLastTime > 2000){
-
-            showShortToast("再按一次返回键退出")
+        if (System.currentTimeMillis() - mLastTime > 2000) {
+            showSnackBar(bottom_navigation_view, "再按一次返回键退出")
             mLastTime = System.currentTimeMillis()
-        }else{
+        } else {
             super.onBackPressed()
         }
+    }
+
+    override fun showSnackBar(view: View, msg: String) {
+        //因为bottom_navigation_view会遮挡住Snackbar,所以先隐藏,在显示
+        bottom_navigation_view.visibility = View.GONE
+        val snackBar = Snackbar.make(view, msg, Snackbar.LENGTH_SHORT)
+        snackBar.setAction("好的") {
+            snackBar.dismiss()
+            bottom_navigation_view.visibility = View.VISIBLE
+        }.show()
+        snackBar.addCallback(object : BaseCallback<Snackbar?>() {
+            override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+                super.onDismissed(transientBottomBar, event)
+                bottom_navigation_view.visibility = View.VISIBLE
+            }
+        })
     }
 }

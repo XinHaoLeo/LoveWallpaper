@@ -15,9 +15,9 @@
   -->
 
 <resources>
-    <string name="app_name">爱壁纸</string>
+    <string name="app_name">壁纸</string>
     <string name="title">标题</string>
-    <string name="welcome_use_love_wallpaper">欢迎使用爱壁纸！</string>
+    <string name="welcome_use_love_wallpaper">欢迎使用LoveWallpaper！</string>
     <string name="agree">同意</string>
     <string name="disagree">不同意并退出APP</string>
     <string name="privacy_policy">《隐私政策》</string>

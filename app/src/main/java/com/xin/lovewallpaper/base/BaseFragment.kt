@@ -57,9 +57,9 @@ abstract class BaseFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         if (mParentView == null) {
-            mParentView = inflater.inflate(initLayoutView(),container,false)
-        } else{
-            if (mParentView?.parent!=null){
+            mParentView = inflater.inflate(initLayoutView(), container, false)
+        } else {
+            if (mParentView?.parent != null) {
                 val viewGroup = mParentView?.parent as ViewGroup
                 viewGroup.removeView(mParentView)
             }

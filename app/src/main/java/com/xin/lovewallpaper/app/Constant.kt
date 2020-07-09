@@ -37,9 +37,15 @@ object Constant {
 
     var contentUrl = "$BASE_URL/page/indexPage/"
 
+    var searchUrl = "$BASE_URL/search/name/"
+
+    var douYinUrl = "$BASE_URL/category/default/"
+
+    var twitterUrl = "$BASE_URL/category/twitter/indexPage/"
+
     const val IMAGE_URL = "image_url"
 
-    const val IMAGE_NUM = "image_num"
+    const val SEARCH_DATA = "search_data"
 
 
     //userAgent

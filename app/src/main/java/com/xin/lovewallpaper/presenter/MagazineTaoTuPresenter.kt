@@ -19,7 +19,7 @@ import com.xin.lovewallpaper.base.BasePresenter
 import com.xin.lovewallpaper.contract.MagazineTaoTuContract
 import com.xin.lovewallpaper.http.OnHttpListener
 import com.xin.lovewallpaper.http.getContentData
-import com.xin.lovewallpaper.http.paresContentData
+import com.xin.lovewallpaper.http.parseContentData
 import org.jsoup.nodes.Document
 
 /**
@@ -42,7 +42,7 @@ class MagazineTaoTuPresenter : BasePresenter<MagazineTaoTuContract.View>(),
     override fun getListContentData(page: Int) {
         getContentData(page, object : OnHttpListener {
             override fun onSuccess(document: Document) {
-                getView()?.showListContentData(paresContentData(document))
+                getView()?.showListContentData(parseContentData(document))
             }
 
             override fun onError(errorMsg: String) {

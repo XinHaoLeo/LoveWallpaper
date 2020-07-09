@@ -38,7 +38,7 @@ abstract class BaseMvpFragment<in V : IView, P : IPresenter<in V>> : BaseFragmen
 
     protected lateinit var mPresenter: P
 
-    protected abstract fun initPresenter():P
+    protected abstract fun initPresenter(): P
 
     override fun initEvent() {
         mPresenter = initPresenter()

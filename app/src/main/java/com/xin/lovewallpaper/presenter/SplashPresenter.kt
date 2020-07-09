@@ -19,7 +19,7 @@ import com.xin.lovewallpaper.base.BasePresenter
 import com.xin.lovewallpaper.contract.SplashContract
 import com.xin.lovewallpaper.http.OnHttpListener
 import com.xin.lovewallpaper.http.getContentData
-import com.xin.lovewallpaper.http.paresContentData
+import com.xin.lovewallpaper.http.parseContentData
 import org.jsoup.nodes.Document
 
 /**
@@ -42,7 +42,7 @@ class SplashPresenter : BasePresenter<SplashContract.View>(), SplashContract.Pre
     override fun getFirstWallpaper(page: Int) {
         getContentData(page,object :OnHttpListener{
             override fun onSuccess(document: Document) {
-                val contentData = paresContentData(document)
+                val contentData = parseContentData(document)
                 getView()?.showFirstWallpaper(contentData)
             }
 

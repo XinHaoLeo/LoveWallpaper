@@ -19,7 +19,7 @@ import com.xin.lovewallpaper.base.BasePresenter
 import com.xin.lovewallpaper.contract.MainContract
 import com.xin.lovewallpaper.http.OnHttpListener
 import com.xin.lovewallpaper.http.getContentData
-import com.xin.lovewallpaper.http.paresContentData
+import com.xin.lovewallpaper.http.parseContentData
 import org.jsoup.nodes.Document
 
 /**
@@ -43,7 +43,7 @@ class MainPresenter : BasePresenter<MainContract.View>(), MainContract.Presenter
     override fun getContent(page: Int) {
         getContentData(page, object : OnHttpListener {
             override fun onSuccess(document: Document) {
-                paresContentData(document)
+                parseContentData(document)
             }
 
             override fun onError(errorMsg: String) {

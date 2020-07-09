@@ -18,6 +18,7 @@ package com.xin.lovewallpaper.ui.fragment
 import android.app.WallpaperManager
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import android.os.Build
 import com.blankj.utilcode.util.ScreenUtils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -35,6 +36,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
+import java.io.InputStream
 
 
 /**
@@ -73,7 +77,7 @@ class BigImageFragment : BaseFragment() {
                         resource: Bitmap,
                         transition: Transition<in Bitmap>?
                     ) {
-                        photoView.setImageBitmap(resource)
+                        photoView?.setImageBitmap(resource)
                     }
                 })
         } catch (e: Exception) {
@@ -150,13 +154,21 @@ class BigImageFragment : BaseFragment() {
                                         try {
                                             val wallpaperManager =
                                                 WallpaperManager.getInstance(mActivity)
-                                            val clazz: Class<*> =
-                                                wallpaperManager.javaClass
-                                            val method = clazz.getMethod(
-                                                "setBitmapToLockWallpaper",
-                                                Bitmap::class.java
-                                            )
-                                            method.invoke(wallpaperManager, resource)
+//                                            val clazz: Class<*> =
+//                                                wallpaperManager.javaClass
+//                                            val method = clazz.getMethod(
+//                                                "setBitmapToLockWallpaper",
+//                                                Bitmap::class.java
+//                                            )
+//                                            method.invoke(wallpaperManager, resource)
+                                            val baos =
+                                                ByteArrayOutputStream()
+                                            resource.compress(Bitmap.CompressFormat.PNG, 100, baos)
+                                            val isBm: InputStream =
+                                                ByteArrayInputStream(baos.toByteArray())
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                                wallpaperManager.setStream(isBm,null,true,WallpaperManager.FLAG_LOCK)
+                                            }
                                             TipDialog.show(
                                                 mActivity,
                                                 "设置成功",
