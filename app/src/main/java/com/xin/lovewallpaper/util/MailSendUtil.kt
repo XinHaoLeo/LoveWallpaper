@@ -140,10 +140,10 @@ class MailSendUtil {
             mailBean.mailServerHost = "smtp.qq.com" //发送方邮箱服务器
             mailBean.mailServerPort = "587" //发送方邮箱端口号
             mailBean.validate = true
-            mailBean.userName = "1838245124@qq.com" // 发送者邮箱地址
-            mailBean.password = "kfdjifcvriaqbgbj" //邮箱授权码，不是密码
-            mailBean.toAddress = "2438565661@qq.com" // 接收者邮箱
-            mailBean.fromAddress = "1838245124@qq.com" // 发送者邮箱
+            mailBean.userName = "xxxxxx@qq.com" // 发送者邮箱地址
+            mailBean.password = "xxxxxx" //邮箱授权码，不是密码
+            mailBean.toAddress = "xxxxxx@qq.com" // 接收者邮箱
+            mailBean.fromAddress = "xxxxxx@qq.com" // 发送者邮箱
             mailBean.subject = "APP问题反馈" // 邮件主题
             mailBean.content = emailMessage // 邮件文本
             return mailBean
@@ -156,10 +156,10 @@ class MailSendUtil {
             mailBean.mailServerHost = "smtp.qq.com" //发送方邮箱服务器
             mailBean.mailServerPort = "587" //发送方邮箱端口号
             mailBean.validate = true
-            mailBean.userName = "1838245124@qq.com" // 发送者邮箱地址
-            mailBean.password = "kfdjifcvriaqbgbj" //邮箱授权码，不是密码
-            mailBean.toAddress = "2438565661@qq.com" // 接收者邮箱
-            mailBean.fromAddress = "1838245124@qq.com" // 发送者邮箱
+            mailBean.userName = "xxxxxx@qq.com" // 发送者邮箱地址
+            mailBean.password = "xxxxxx" //邮箱授权码，不是密码
+            mailBean.toAddress = "xxxxxx@qq.com" // 接收者邮箱
+            mailBean.fromAddress = "xxxxxx@qq.com" // 发送者邮箱
             mailBean.subject = "APP问题反馈" // 邮件主题
             mailBean.content = emailMessage
             mailBean.attachFile = file
